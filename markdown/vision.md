@@ -1,1 +1,14 @@
-The project vision. What are the requirements. What are the problems it's solving. USP maybe.
+# Project vision
+
+## Background and problem description
+
+## User/target group
+
+## Competing and similar systems 
+
+## Base requirements
+
+## Author
+Anna Manole
+
+## Technologies
