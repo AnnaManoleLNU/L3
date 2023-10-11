@@ -1,0 +1,1 @@
+Here I will talk about how I tested the requirements from vision.md. Manual testing with input and expected output. Or it can be automatic testing too. At least a test per requirement.

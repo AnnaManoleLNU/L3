@@ -1,0 +1,1 @@
+Here I will reflect on the book CC chapters 2-11. I will be providing screenshots on how I changed my code from L2/L3 according to the book. 10 screenshots. 10 reflections with 4-6 sentences each.

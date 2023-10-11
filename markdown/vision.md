@@ -1,0 +1,1 @@
+The project vision. What are the requirements. What are the problems it's solving. USP maybe.
