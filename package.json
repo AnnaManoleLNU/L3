@@ -1,0 +1,28 @@
+{
+  "name": "l3",
+  "version": "1.0.0",
+  "description": "color memory game",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "start": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnnaManoleLNU/L3.git"
+  },
+  "author": "Anna Manole",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AnnaManoleLNU/L3/issues"
+  },
+  "homepage": "https://github.com/AnnaManoleLNU/L3#readme",
+  "dependencies": {
+    "prettier": "^3.0.3",
+    "vite": "^4.4.11"
+  }
+}
