@@ -1,10 +1,42 @@
 body {
     background-color: #212529;
-    font-family: 'Red Hat Display', sans-serif;
-    font-size: 16px;
-    color: beige;
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center; 
     flex-direction: column;
+}
+
+h1 {
+    font-size: 80px;
+}
+
+button {
+    background-color: gray;
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+input {
+    background-color: gray;
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.red {
+    color: red;
 }
