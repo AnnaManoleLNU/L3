@@ -10,7 +10,9 @@ export class Game {
   #submitGameButton
   #endScreen
   #playAgainButton
-  #tiles = []
+  #tiles = [] // the original tiles
+  #shuffledTiles = []
+  #userTiles = [] // the tiles the user clicks on
   #tile
 
   constructor() {
@@ -33,7 +35,7 @@ export class Game {
       this.#usernameInput.value = '';
     });
   }
-  
+
   #selectDifficulty() {
     this.#difficultyScreen.addEventListener('click', (event) => {
       const difficulty = event.target.id;
@@ -42,6 +44,7 @@ export class Game {
         this.#gameScreen.classList.remove('hidden');
         this.#generateTiles(3);
         this.#initiateGuessingGame();
+        this.#displayEndMessage();
 
       }
       if (difficulty === 'medium') {
@@ -86,7 +89,7 @@ export class Game {
     }
   }
 
-  #clearTiles () {
+  #clearTiles() {
     const gameBoard = document.getElementById('game-board');
     while (gameBoard.firstChild) {
       gameBoard.removeChild(gameBoard.firstChild);
@@ -95,41 +98,64 @@ export class Game {
   }
 
   #shuffleTiles() {
-    for (let i = this.#tiles.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * i);
-      const temp = this.#tiles[i];
-      this.#tiles[i] = this.#tiles[j];
-      this.#tiles[j] = temp;
+    this.#shuffledTiles = Array.from(this.#tiles);
+    for (let i = this.#shuffledTiles.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.#shuffledTiles[i], this.#shuffledTiles[j]] = [this.#shuffledTiles[j], this.#shuffledTiles[i]];
     }
+    return this.#shuffledTiles;
   }
 
   #initiateGuessingGame() {
     setTimeout(() => {
-      this.#shuffleTiles();
+      this.#shuffledTiles = this.#shuffleTiles();
+      this.#clearTiles();
+
+      // Reconstructing and appending shuffled tiles
       const gameBoard = document.getElementById('game-board');
-      for (let i = 0; i < this.#tiles.length; i++) {
-        gameBoard.appendChild(this.#tiles[i]);
-        this.#tiles[i].classList.remove('disabled');
-      }
-     // select the first h2 of the game screen and change the text to titles shuffled
+      this.#shuffledTiles.forEach(tile => {
+        const newTile = document.createElement('button');
+        newTile.classList.add('tile');
+        newTile.style.backgroundColor = tile.style.backgroundColor;
+        gameBoard.appendChild(newTile);
+      });
+
       const gameTitle = document.querySelector('#game-screen h2');
       gameTitle.textContent = 'Tiles shuffled!';
-      // remove the hidden class from the user-guesses section
-      const userGuesses = document.getElementById('user-guesses');
-      userGuesses.classList.remove('hidden');
+      document.getElementById('user-guesses').classList.remove('hidden');
+
       this.#tileOnClick();
     }, 4000);
   }
 
   #tileOnClick() {
-    for (let i = 0; i < this.#tiles.length; i++) {
-      this.#tiles[i].addEventListener('click', () => {
+    document.querySelectorAll('#game-board .tile').forEach(tile => {
+      tile.addEventListener('click', () => {
+        console.log('Tile clicked! Color:', tile.style.backgroundColor);
         const userTile = document.createElement('button');
         userTile.classList.add('tile');
-        userTile.style.backgroundColor = this.#tiles[i].style.backgroundColor;
-        const userTiles = document.getElementById('guesses');
-        userTiles.appendChild(userTile);
+        userTile.style.backgroundColor = tile.style.backgroundColor;
+        document.getElementById('guesses').appendChild(userTile);
       });
+    });
+  }
+
+  #isGameWon() {
+    for (let i = 0; i < this.#tiles.length; i++) {
+      if (this.#tiles[i] === this.#userTiles[i]) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  #displayEndMessage() {
+    const endMessage = document.querySelector('#end-screen h2');
+    if (this.#isGameWon()) {
+      endMessage.textContent = 'You won!';
+    } else {
+      endMessage.textContent = 'You lost!';
     }
   }
 
