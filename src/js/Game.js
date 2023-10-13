@@ -27,6 +27,10 @@ export class Game {
   }
 
   #startGame() {
+    // clear the game board for the next game
+    this.#clearTiles();
+    // clear the user's guesses
+    this.#removeUserGuesses();
     this.#usernameForm.addEventListener('submit', (event) => {
       event.preventDefault();
       this.#startScreen.classList.add('hidden');
@@ -44,8 +48,6 @@ export class Game {
         this.#gameScreen.classList.remove('hidden');
         this.#generateTiles(3);
         this.#initiateGuessingGame();
-        this.#displayEndMessage();
-
       }
       if (difficulty === 'medium') {
         this.#difficultyScreen.classList.add('hidden');
@@ -109,10 +111,11 @@ export class Game {
   #initiateGuessingGame() {
     setTimeout(() => {
       this.#shuffledTiles = this.#shuffleTiles();
-      this.#clearTiles();
-
-      // Reconstructing and appending shuffled tiles
       const gameBoard = document.getElementById('game-board');
+      while (gameBoard.firstChild) {
+        gameBoard.removeChild(gameBoard.firstChild);
+      }
+      // Reconstructing and appending shuffled tiles
       this.#shuffledTiles.forEach(tile => {
         const newTile = document.createElement('button');
         newTile.classList.add('tile');
@@ -136,13 +139,16 @@ export class Game {
         userTile.classList.add('tile');
         userTile.style.backgroundColor = tile.style.backgroundColor;
         document.getElementById('guesses').appendChild(userTile);
+        this.#userTiles.push(userTile);
       });
     });
   }
 
   #isGameWon() {
+    console.log('Tiles:', this.#tiles);
+    console.log('User tiles:', this.#userTiles);
     for (let i = 0; i < this.#tiles.length; i++) {
-      if (this.#tiles[i] === this.#userTiles[i]) {
+      if (this.#tiles[i].style.backgroundColor === this.#userTiles[i].style.backgroundColor) {
         return true;
       } else {
         return false;
@@ -186,10 +192,8 @@ export class Game {
     this.#submitGameButton.addEventListener('click', () => {
       this.#gameScreen.classList.add('hidden');
       this.#endScreen.classList.remove('hidden');
-      // clear the game board for the next game
-      this.#clearTiles();
-      // clear the user's guesses
-      this.#removeUserGuesses();
+      // check if the game was won
+      this.#displayEndMessage();
     });
   }
 
