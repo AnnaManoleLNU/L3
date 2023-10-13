@@ -33,6 +33,17 @@ input {
     text-align: center;
 }
 
+.tile {
+    height: 50px;
+    width: 50px;
+    
+}
+
+#game-board {
+    display: flex;
+    gap: 10px;
+}
+
 .hidden {
     display: none !important;
 }

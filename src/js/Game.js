@@ -1,8 +1,11 @@
+import { ColorGenerator } from '../../lib/js/ColorGenerator.js'
+import { ColorSchemeGenerator } from '../../lib/js/ColorSchemeGenerator.js'
+
 export class Game {
   #startScreen
   #usernameForm
   #usernameInput
-  // #submitUsernameButton // i use the form instead
+  #difficultyScreen
   #gameScreen
   #submitGameButton
   #endScreen
@@ -12,7 +15,7 @@ export class Game {
     this.#startScreen = document.getElementById('start-screen');
     this.#usernameForm = document.getElementById('username-form');
     this.#usernameInput = document.getElementById('username-input');
-    // this.#submitUsernameButton = document.getElementById('username-submit');
+    this.#difficultyScreen = document.getElementById('difficulty-screen');
     this.#gameScreen = document.getElementById('game-screen');
     this.#submitGameButton = document.getElementById('game-submit');
     this.#endScreen = document.getElementById('end-screen');
@@ -23,17 +26,59 @@ export class Game {
     this.#usernameForm.addEventListener('submit', (event) => {
       event.preventDefault();
       this.#startScreen.classList.add('hidden');
-      this.#gameScreen.classList.remove('hidden');
+      this.#difficultyScreen.classList.remove('hidden');
       localStorage.setItem('username', this.#usernameInput.value);
       this.#usernameInput.value = '';
-      console.log(localStorage.getItem('username'));
     });
   }
+  
+  #selectDifficulty() {
+    this.#difficultyScreen.addEventListener('click', (event) => {
+      const difficulty = event.target.id;
+      if (difficulty === 'easy') {
+        this.#difficultyScreen.classList.add('hidden');
+        this.#gameScreen.classList.remove('hidden');
+        this.#generateEasyLevel();
+      }
+    });
+  }
+
+  #generateEasyLevel() {
+    const easyLevelArray = [];
+    const colorScheme = this.#generateColors();
+    for (let i = 0; i < 3; i++) {
+      const tile = document.createElement('div');
+      tile.classList.add('tile');
+      tile.style.backgroundColor = colorScheme[i];
+      easyLevelArray.push(tile);
+    }
+    const gameBoard = document.getElementById('game-board');
+    for (let i = 0; i < easyLevelArray.length; i++) {
+      gameBoard.appendChild(easyLevelArray[i]);
+    }
+  }
+
+  #generateColors() {
+    const colorScheme = [];
+    const colorGenerator = new ColorGenerator();
+    const color = colorGenerator.generateLightColor();
+    colorScheme.push(color);
+
+    const colorSchemeGenerator = new ColorSchemeGenerator();
+    const generatedColors = colorSchemeGenerator.generateAnalogousColorScheme(color);
+    for (let i = 0; i < generatedColors.length; i++) {
+      colorScheme.push(generatedColors[i]);
+    }
+    return colorScheme;
+  }
+
 
   #endGame() {
     this.#submitGameButton.addEventListener('click', () => {
       this.#gameScreen.classList.add('hidden');
       this.#endScreen.classList.remove('hidden');
+      const username = localStorage.getItem('username');
+      document.querySelector('h3').textContent += ` Congratulations ${username}!`;
     });
   }
 
@@ -44,8 +89,10 @@ export class Game {
     });
   }
 
+
   playGame() {
     this.#startGame();
+    this.#selectDifficulty();
     this.#endGame();
     this.#playAgain();
   }
