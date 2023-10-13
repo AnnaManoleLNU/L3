@@ -156,10 +156,11 @@ export class Game {
 
   #displayEndMessage() {
     const endMessage = document.querySelector('#end-screen h2');
+    const username = localStorage.getItem('username');
     if (this.#isGameWon()) {
-      endMessage.textContent = 'You won!';
+      endMessage.textContent = `Congratulations ${username}! You won!`;
     } else {
-      endMessage.textContent = 'You lost!';
+      endMessage.textContent = `Sorry ${username}, you lost!`;
     }
   }
 
