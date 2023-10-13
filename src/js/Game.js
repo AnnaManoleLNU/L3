@@ -27,10 +27,6 @@ export class Game {
   }
 
   #startGame() {
-    // clear the game board for the next game
-    this.#clearTiles();
-    // clear the user's guesses
-    this.#removeUserGuesses();
     this.#usernameForm.addEventListener('submit', (event) => {
       event.preventDefault();
       this.#startScreen.classList.add('hidden');
@@ -199,6 +195,10 @@ export class Game {
 
   #playAgain() {
     this.#playAgainButton.addEventListener('click', () => {
+      // clear the game board for the next game
+      this.#clearTiles();
+      // clear the user's guesses
+      this.#removeUserGuesses();
       this.#endScreen.classList.add('hidden');
       this.#startScreen.classList.remove('hidden');
     });
