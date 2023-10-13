@@ -7,6 +7,7 @@ export class Game {
   #usernameInput
   #difficultyScreen
   #gameScreen
+  #gameBoard
   #submitGameButton
   #endScreen
   #playAgainButton
@@ -21,6 +22,7 @@ export class Game {
     this.#usernameInput = document.getElementById('username-input');
     this.#difficultyScreen = document.getElementById('difficulty-screen');
     this.#gameScreen = document.getElementById('game-screen');
+    this.#gameBoard = document.getElementById('game-board');
     this.#submitGameButton = document.getElementById('game-submit');
     this.#endScreen = document.getElementById('end-screen');
     this.#playAgainButton = document.getElementById('play-again');
@@ -81,16 +83,14 @@ export class Game {
       this.#tile.style.backgroundColor = colorScheme[i];
       this.#tiles.push(this.#tile);
     }
-    const gameBoard = document.getElementById('game-board');
     for (let i = 0; i < this.#tiles.length; i++) {
-      gameBoard.appendChild(this.#tiles[i]);
+      this.#gameBoard.appendChild(this.#tiles[i]);
     }
   }
 
   #clearTiles() {
-    const gameBoard = document.getElementById('game-board');
-    while (gameBoard.firstChild) {
-      gameBoard.removeChild(gameBoard.firstChild);
+    while (this.#gameBoard.firstChild) {
+      this.#gameBoard.removeChild(this.#gameBoard.firstChild);
     }
     this.#tiles = [];
   }
@@ -107,16 +107,15 @@ export class Game {
   #initiateGuessingGame() {
     setTimeout(() => {
       this.#shuffledTiles = this.#shuffleTiles();
-      const gameBoard = document.getElementById('game-board');
-      while (gameBoard.firstChild) {
-        gameBoard.removeChild(gameBoard.firstChild);
+      while (this.#gameBoard.firstChild) {
+        this.#gameBoard.removeChild(this.#gameBoard.firstChild);
       }
       // Reconstructing and appending shuffled tiles
       this.#shuffledTiles.forEach(tile => {
         const newTile = document.createElement('button');
         newTile.classList.add('tile');
         newTile.style.backgroundColor = tile.style.backgroundColor;
-        gameBoard.appendChild(newTile);
+        this.#gameBoard.appendChild(newTile);
       });
 
       const gameTitle = document.querySelector('#game-screen h2');
@@ -127,10 +126,15 @@ export class Game {
     }, 4000);
   }
 
+  #resetGuessingGame() {
+    const gameTitle = document.querySelector('#game-screen h2');
+    gameTitle.textContent = 'Shuffling tiles...';
+    document.getElementById('user-guesses').classList.add('hidden');
+  }
+
   #tileOnClick() {
     document.querySelectorAll('#game-board .tile').forEach(tile => {
       tile.addEventListener('click', () => {
-        console.log('Tile clicked! Color:', tile.style.backgroundColor);
         const userTile = document.createElement('button');
         userTile.classList.add('tile');
         userTile.style.backgroundColor = tile.style.backgroundColor;
@@ -141,8 +145,6 @@ export class Game {
   }
 
   #isGameWon() {
-    console.log('Tiles:', this.#tiles);
-    console.log('User tiles:', this.#userTiles);
     for (let i = 0; i < this.#tiles.length; i++) {
       if (this.#tiles[i].style.backgroundColor === this.#userTiles[i].style.backgroundColor) {
         return true;
@@ -168,7 +170,6 @@ export class Game {
     }
   }
 
-
   #generateColors() {
     const colorScheme = [];
     const colorGenerator = new ColorGenerator();
@@ -183,12 +184,10 @@ export class Game {
     return colorScheme;
   }
 
-
   #endGame() {
     this.#submitGameButton.addEventListener('click', () => {
       this.#gameScreen.classList.add('hidden');
       this.#endScreen.classList.remove('hidden');
-      // check if the game was won
       this.#displayEndMessage();
     });
   }
@@ -199,11 +198,12 @@ export class Game {
       this.#clearTiles();
       // clear the user's guesses
       this.#removeUserGuesses();
+      // reset the game
+      this.#resetGuessingGame();
       this.#endScreen.classList.add('hidden');
       this.#startScreen.classList.remove('hidden');
     });
   }
-
 
   playGame() {
     this.#startGame();
