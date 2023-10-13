@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;700&display=swap" rel="stylesheet">
     <title>Color Memory Game</title>
-  <script type="module" crossorigin src="/assets/index-cdb33da6.js"></script>
-  <link rel="stylesheet" href="/assets/index-ef8d26d9.css">
+  <script type="module" crossorigin src="/assets/index-0c16d67c.js"></script>
+  <link rel="stylesheet" href="/assets/index-36db7d29.css">
 </head>
 
 <body>
@@ -34,12 +34,13 @@
     <div id="game-screen" class="hidden">
         <div id="game-board">
         </div>
-        <div id="user-guesses">
+        <h2>Shuffling tiles...</h2>
+        <div id="user-guesses" class="hidden">
             <p>Click on the color to add it to your list of guesses. Your guesses are:</p>
             <div id="guesses">
             </div>   
+            <button id="game-submit">Submit Combination</button>
         </div>
-        <button id="game-submit">Submit Combination</button>
     </div>
     <div id="end-screen" class="hidden">
         <h3>Game Over!</h3>

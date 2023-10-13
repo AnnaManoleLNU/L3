@@ -74,9 +74,9 @@ export class Game {
       }
     }
     for (let i = 0; i < numberOfTiles; i++) {
-
       this.#tile = document.createElement('button');
       this.#tile.classList.add('tile');
+      this.#tile.classList.add('disabled');
       this.#tile.style.backgroundColor = colorScheme[i];
       this.#tiles.push(this.#tile);
     }
@@ -109,10 +109,16 @@ export class Game {
       const gameBoard = document.getElementById('game-board');
       for (let i = 0; i < this.#tiles.length; i++) {
         gameBoard.appendChild(this.#tiles[i]);
+        this.#tiles[i].classList.remove('disabled');
       }
-      console.log('colors shuffled');
+     // select the first h2 of the game screen and change the text to titles shuffled
+      const gameTitle = document.querySelector('#game-screen h2');
+      gameTitle.textContent = 'Tiles shuffled!';
+      // remove the hidden class from the user-guesses section
+      const userGuesses = document.getElementById('user-guesses');
+      userGuesses.classList.remove('hidden');
+      this.#tileOnClick();
     }, 4000);
-    this.#tileOnClick();
   }
 
   #tileOnClick() {

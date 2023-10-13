@@ -59,6 +59,10 @@ input {
     display: none !important;
 }
 
+.disabled {
+    pointer-events: none;
+}
+
 #start-screen, #game-screen, #end-screen, #difficulty-screen, #user-guesses {
     display: flex;
     flex-direction: column;
