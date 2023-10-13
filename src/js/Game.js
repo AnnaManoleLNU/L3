@@ -11,6 +11,7 @@ export class Game {
   #endScreen
   #playAgainButton
   #tiles = []
+  #tile
 
   constructor() {
     this.#startScreen = document.getElementById('start-screen');
@@ -40,20 +41,29 @@ export class Game {
         this.#difficultyScreen.classList.add('hidden');
         this.#gameScreen.classList.remove('hidden');
         this.#generateTiles(3);
+        this.#initiateGuessingGame();
+
       }
       if (difficulty === 'medium') {
         this.#difficultyScreen.classList.add('hidden');
         this.#gameScreen.classList.remove('hidden');
         this.#generateTiles(6);
+        this.#initiateGuessingGame();
       }
       if (difficulty === 'hard') {
         this.#difficultyScreen.classList.add('hidden');
         this.#gameScreen.classList.remove('hidden');
         this.#generateTiles(9);
+        this.#initiateGuessingGame();
       }
     });
   }
 
+  /**
+   * Generates tiles as buttons, based on the number of tiles passed in.
+   *
+   * @param {number} numberOfTiles 
+   */
   #generateTiles(numberOfTiles) {
     const colorScheme = []
     // run the generate colors method for the number of tiles divided by number of colors in the scheme (3/3 or 6/3 or 9/3)
@@ -65,10 +75,10 @@ export class Game {
     }
     for (let i = 0; i < numberOfTiles; i++) {
 
-      const tile = document.createElement('div');
-      tile.classList.add('tile');
-      tile.style.backgroundColor = colorScheme[i];
-      this.#tiles.push(tile);
+      this.#tile = document.createElement('button');
+      this.#tile.classList.add('tile');
+      this.#tile.style.backgroundColor = colorScheme[i];
+      this.#tiles.push(this.#tile);
     }
     const gameBoard = document.getElementById('game-board');
     for (let i = 0; i < this.#tiles.length; i++) {
@@ -83,6 +93,47 @@ export class Game {
     }
     this.#tiles = [];
   }
+
+  #shuffleTiles() {
+    for (let i = this.#tiles.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i);
+      const temp = this.#tiles[i];
+      this.#tiles[i] = this.#tiles[j];
+      this.#tiles[j] = temp;
+    }
+  }
+
+  #initiateGuessingGame() {
+    setTimeout(() => {
+      this.#shuffleTiles();
+      const gameBoard = document.getElementById('game-board');
+      for (let i = 0; i < this.#tiles.length; i++) {
+        gameBoard.appendChild(this.#tiles[i]);
+      }
+      console.log('colors shuffled');
+    }, 4000);
+    this.#tileOnClick();
+  }
+
+  #tileOnClick() {
+    for (let i = 0; i < this.#tiles.length; i++) {
+      this.#tiles[i].addEventListener('click', () => {
+        const userTile = document.createElement('button');
+        userTile.classList.add('tile');
+        userTile.style.backgroundColor = this.#tiles[i].style.backgroundColor;
+        const userTiles = document.getElementById('guesses');
+        userTiles.appendChild(userTile);
+      });
+    }
+  }
+
+  #removeUserGuesses() {
+    const userTiles = document.getElementById('guesses');
+    while (userTiles.firstChild) {
+      userTiles.removeChild(userTiles.firstChild);
+    }
+  }
+
 
   #generateColors() {
     const colorScheme = [];
@@ -105,6 +156,8 @@ export class Game {
       this.#endScreen.classList.remove('hidden');
       // clear the game board for the next game
       this.#clearTiles();
+      // clear the user's guesses
+      this.#removeUserGuesses();
     });
   }
 

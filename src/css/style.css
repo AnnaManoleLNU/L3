@@ -46,10 +46,10 @@ input {
 .tile {
     height: 50px;
     width: 50px;
-    
+    border: none;
 }
 
-#game-board {
+#game-board, #user-guesses, #guesses {
     display: flex;
     gap: 10px;
     margin-bottom: 50px;
@@ -59,7 +59,7 @@ input {
     display: none !important;
 }
 
-#start-screen, #game-screen, #end-screen, #difficulty-screen {
+#start-screen, #game-screen, #end-screen, #difficulty-screen, #user-guesses {
     display: flex;
     flex-direction: column;
     align-items: center;
