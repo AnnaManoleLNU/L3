@@ -10,6 +10,7 @@ export class Game {
   #submitGameButton
   #endScreen
   #playAgainButton
+  #tiles = []
 
   constructor() {
     this.#startScreen = document.getElementById('start-screen');
@@ -38,24 +39,49 @@ export class Game {
       if (difficulty === 'easy') {
         this.#difficultyScreen.classList.add('hidden');
         this.#gameScreen.classList.remove('hidden');
-        this.#generateEasyLevel();
+        this.#generateTiles(3);
+      }
+      if (difficulty === 'medium') {
+        this.#difficultyScreen.classList.add('hidden');
+        this.#gameScreen.classList.remove('hidden');
+        this.#generateTiles(6);
+      }
+      if (difficulty === 'hard') {
+        this.#difficultyScreen.classList.add('hidden');
+        this.#gameScreen.classList.remove('hidden');
+        this.#generateTiles(9);
       }
     });
   }
 
-  #generateEasyLevel() {
-    const easyLevelArray = [];
-    const colorScheme = this.#generateColors();
-    for (let i = 0; i < 3; i++) {
+  #generateTiles(numberOfTiles) {
+    const colorScheme = []
+    // run the generate colors method for the number of tiles divided by number of colors in the scheme (3/3 or 6/3 or 9/3)
+    for (let i = 0; i < numberOfTiles / 3; i++) {
+      const generatedColors = this.#generateColors();
+      for (let i = 0; i < generatedColors.length; i++) {
+        colorScheme.push(generatedColors[i]);
+      }
+    }
+    for (let i = 0; i < numberOfTiles; i++) {
+
       const tile = document.createElement('div');
       tile.classList.add('tile');
       tile.style.backgroundColor = colorScheme[i];
-      easyLevelArray.push(tile);
+      this.#tiles.push(tile);
     }
     const gameBoard = document.getElementById('game-board');
-    for (let i = 0; i < easyLevelArray.length; i++) {
-      gameBoard.appendChild(easyLevelArray[i]);
+    for (let i = 0; i < this.#tiles.length; i++) {
+      gameBoard.appendChild(this.#tiles[i]);
     }
+  }
+
+  #clearTiles () {
+    const gameBoard = document.getElementById('game-board');
+    while (gameBoard.firstChild) {
+      gameBoard.removeChild(gameBoard.firstChild);
+    }
+    this.#tiles = [];
   }
 
   #generateColors() {
@@ -77,8 +103,8 @@ export class Game {
     this.#submitGameButton.addEventListener('click', () => {
       this.#gameScreen.classList.add('hidden');
       this.#endScreen.classList.remove('hidden');
-      const username = localStorage.getItem('username');
-      document.querySelector('h3').textContent += ` Congratulations ${username}!`;
+      // clear the game board for the next game
+      this.#clearTiles();
     });
   }
 

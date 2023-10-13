@@ -10,18 +10,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;700&display=swap" rel="stylesheet">
     <title>Color Memory Game</title>
-  <script type="module" crossorigin src="/assets/index-3962ca2b.js"></script>
-  <link rel="stylesheet" href="/assets/index-1a0f6113.css">
+  <script type="module" crossorigin src="/assets/index-27831c16.js"></script>
+  <link rel="stylesheet" href="/assets/index-e0652eae.css">
 </head>
 
 <body>
     <h1>Color Memory Game</h1>
-    <p id="username-prompt">Please enter your username</p>
-    <form id="username-form">
-        <input type="text" id="username">
-        <button id="submit-username" type="submit">Submit</button>
-    </form>
-    <h2 class="hidden" id="game-display">Game in development! &#128227; </h2>
+    <div id="start-screen">
+        <p id="username-prompt">Please enter your username</p>
+        <form id="username-form">
+            <input type="text" id="username-input">
+            <button id="username-submit" type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="difficulty-screen" class="hidden">
+        <h2>Select difficulty</h2>
+        <div id="difficulty-buttons">
+            <button id="easy">Easy</button>
+            <button id="medium">Medium</button>
+            <button id="hard">Hard</button>
+        </div>
+    </div>
+    <div id="game-screen" class="hidden">
+        <div id="game-board">
+        </div>
+        <button id="game-submit">Submit Combination</button>
+    </div>
+    <div id="end-screen" class="hidden">
+        <h3>Game Over!</h3>
+        <button id="play-again">Play Again</button>
+    </div>
 </body>
 
 </html>

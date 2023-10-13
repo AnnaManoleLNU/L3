@@ -13,13 +13,23 @@ h1 {
 }
 
 button {
-    background-color: gray;
+    background-color: #212529;
     color: whitesmoke;
-    border: none;
+    border: whitesmoke solid 1px;
     border-radius: 5px;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 5px;
     cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+}
+
+button:hover {
+    background-color: whitesmoke;
+    color: #212529;
+    border: #212529 solid 1px;
+    transition: 0.1s;
 }
 
 input {
@@ -42,13 +52,14 @@ input {
 #game-board {
     display: flex;
     gap: 10px;
+    margin-bottom: 50px;
 }
 
 .hidden {
     display: none !important;
 }
 
-#start-screen, #game-screen, #end-screen {
+#start-screen, #game-screen, #end-screen, #difficulty-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
