@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script src="script.js" type="module"></script>
+    <script src="index.js" type="module"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;700&display=swap" rel="stylesheet">
@@ -14,12 +14,21 @@
 
 <body>
     <h1>Color Memory Game</h1>
-    <p id="username-prompt">Please enter your username</p>
-    <form id="username-form">
-        <input type="text" id="username">
-        <button id="submit-username" type="submit">Submit</button>
-    </form>
-    <h2 class="hidden" id="game-display">Game in development! &#128227; </h2>
+    <div id="start-screen">
+        <p id="username-prompt">Please enter your username</p>
+        <form id="username-form">
+            <input type="text" id="username-input">
+            <button id="username-submit" type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="game-screen" class="hidden">
+        <h2 id="game">&#127799; &#127801; &#127803; &#127804;</h2>
+        <button id="game-submit">Submit Combination</button>
+    </div>
+    <div id="end-screen" class="hidden">
+        <h1>Game Over!</h1>
+        <button id="play-again">Play Again</button>
+    </div>
 </body>
 
 </html>
