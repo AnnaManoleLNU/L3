@@ -175,6 +175,7 @@ export class Game {
     while (userTiles.firstChild) {
       userTiles.removeChild(userTiles.firstChild);
     }
+    this.#userTiles = []
   }
 
   #generateColors() {
