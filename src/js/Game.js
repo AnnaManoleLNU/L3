@@ -11,10 +11,10 @@ export class Game {
   #submitGameButton
   #endScreen
   #playAgainButton
-  #tiles = [] // the original tiles
-  #shuffledTiles = []
-  #userTiles = [] // the tiles the user clicks on
   #tile
+  #originalTiles = [] 
+  #shuffledTiles = []
+  #userTiles = []
 
   constructor() {
     this.#startScreen = document.getElementById('start-screen');
@@ -50,13 +50,13 @@ export class Game {
       if (difficulty === 'medium') {
         this.#difficultyScreen.classList.add('hidden');
         this.#gameScreen.classList.remove('hidden');
-        this.#generateTiles(6);
+        this.#generateTiles(4);
         this.#initiateGuessingGame();
       }
       if (difficulty === 'hard') {
         this.#difficultyScreen.classList.add('hidden');
         this.#gameScreen.classList.remove('hidden');
-        this.#generateTiles(9);
+        this.#generateTiles(6);
         this.#initiateGuessingGame();
       }
     });
@@ -70,6 +70,7 @@ export class Game {
   #generateTiles(numberOfTiles) {
     const colorScheme = []
     // run the generate colors method for the number of tiles divided by number of colors in the scheme (3/3 or 6/3 or 9/3)
+
     for (let i = 0; i < numberOfTiles / 3; i++) {
       const generatedColors = this.#generateColors();
       for (let i = 0; i < generatedColors.length; i++) {
@@ -81,22 +82,36 @@ export class Game {
       this.#tile.classList.add('tile');
       this.#tile.classList.add('disabled');
       this.#tile.style.backgroundColor = colorScheme[i];
-      this.#tiles.push(this.#tile);
+      this.#originalTiles.push(this.#tile);
     }
-    for (let i = 0; i < this.#tiles.length; i++) {
-      this.#gameBoard.appendChild(this.#tiles[i]);
+    for (let i = 0; i < this.#originalTiles.length; i++) {
+      this.#gameBoard.appendChild(this.#originalTiles[i]);
     }
+  }
+
+  #generateColors() {
+    const colorScheme = [];
+    const colorGenerator = new ColorGenerator();
+    const color = colorGenerator.generateLightColor();
+    colorScheme.push(color);
+
+    const colorSchemeGenerator = new ColorSchemeGenerator();
+    const generatedColors = colorSchemeGenerator.generateAnalogousColorScheme(color);
+    for (let i = 0; i < generatedColors.length; i++) {
+      colorScheme.push(generatedColors[i]);
+    }
+    return colorScheme;
   }
 
   #clearTiles() {
     while (this.#gameBoard.firstChild) {
       this.#gameBoard.removeChild(this.#gameBoard.firstChild);
     }
-    this.#tiles = [];
+    this.#originalTiles = [];
   }
-
+  
   #shuffleTiles() {
-    this.#shuffledTiles = Array.from(this.#tiles);
+    this.#shuffledTiles = Array.from(this.#originalTiles);
     for (let i = this.#shuffledTiles.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [this.#shuffledTiles[i], this.#shuffledTiles[j]] = [this.#shuffledTiles[j], this.#shuffledTiles[i]];
@@ -145,18 +160,28 @@ export class Game {
   }
 
   #isGameWon() {
-    for (let i = 0; i < this.#tiles.length; i++) {
-      // Check first if the user has submitted the right amount of tiles.
-      if (this.#tiles.length != this.#userTiles.length) {
-        return false;
-      }
+    if (!this.#isTileLengthCorrect()) {
+      return false;
+    }
+    for (let i = 0; i < this.#originalTiles.length; i++) {
+      this.#isTileColorCorrect(i);
+      return true;
+    }
+  }
 
-      // Then check if the style matches.
-      if (this.#tiles[i].style.backgroundColor === this.#userTiles[i].style.backgroundColor) {
-        return true;
-      } else {
-        return false;
-      }
+  #isTileLengthCorrect() {
+    if (this.#originalTiles.length === this.#userTiles.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  #isTileColorCorrect(i) {
+    if (this.#originalTiles[i].style.backgroundColor === this.#userTiles[i].style.backgroundColor) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -178,19 +203,6 @@ export class Game {
     this.#userTiles = []
   }
 
-  #generateColors() {
-    const colorScheme = [];
-    const colorGenerator = new ColorGenerator();
-    const color = colorGenerator.generateLightColor();
-    colorScheme.push(color);
-
-    const colorSchemeGenerator = new ColorSchemeGenerator();
-    const generatedColors = colorSchemeGenerator.generateAnalogousColorScheme(color);
-    for (let i = 0; i < generatedColors.length; i++) {
-      colorScheme.push(generatedColors[i]);
-    }
-    return colorScheme;
-  }
 
   #endGame() {
     this.#submitGameButton.addEventListener('click', () => {
