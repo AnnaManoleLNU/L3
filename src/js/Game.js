@@ -146,6 +146,12 @@ export class Game {
 
   #isGameWon() {
     for (let i = 0; i < this.#tiles.length; i++) {
+      // Check first if the user has submitted the right amount of tiles.
+      if (this.#tiles.length != this.#userTiles.length) {
+        return false;
+      }
+
+      // Then check if the style matches.
       if (this.#tiles[i].style.backgroundColor === this.#userTiles[i].style.backgroundColor) {
         return true;
       } else {
