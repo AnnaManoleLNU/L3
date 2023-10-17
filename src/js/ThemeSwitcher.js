@@ -3,7 +3,9 @@ export class ThemeSwitcher {
   #isSwitching = false;
   #switchDelay = 100; // 100ms delay
 
-  constructor() {}
+  constructor() {
+    this.initiateThemeSwitcher(); // TODO: make this private and use it in ColorMemoryGame.js
+  }
 
   initiateThemeSwitcher() {
     const themeSwitcher = document.querySelector('.theme-switcher');
@@ -26,11 +28,14 @@ export class ThemeSwitcher {
 
   #setLightTheme() {
     this.#currentTheme = 'light';
-    console.log(this.#currentTheme);
+    document.documentElement.style.setProperty('--light', '#212529');  
+    document.documentElement.style.setProperty('--dark', 'whitesmoke'); 
   }
 
   #setDarkTheme() {
     this.#currentTheme = 'dark';
+    document.documentElement.style.setProperty('--light', 'whitesmoke');
+    document.documentElement.style.setProperty('--dark', '#212529');
     console.log(this.#currentTheme);
   }
 
