@@ -85,18 +85,32 @@ input {
 @media only screen and (max-width: 900px) {
     body {
         font-size: 0.87em;
+        margin-top: 100px;
     }
 
     h1 {
-        font-size: 40px;
+        font-size: 50px;
     }
 
     input {
         font-size: 15px;
     }
+
     #game-board {
         margin-bottom: 0px;
     }
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 0.79em;
+        margin-top: 200px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
 }
 
 /* Switcher */
