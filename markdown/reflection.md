@@ -38,3 +38,20 @@ _Figure 7_
 
 ![Figure 8](img/8.png) <br>
 _Figure 8_
+
+## Chapter 5 - Formatting
+
+In L2 and L3 I have the most important concepts at the top and least important at the bottom, with helper methods underneath the methods that call them (Figure 9).
+Empty lines separate concepts that are not related if the method does more than one thing.
+
+Instance variables, that are used by many methods in the class, are at the top of the class. Otherwise if they are only used inside one method they are declared inside that method so that they are relevant to the context they are being used in (Figure 10).
+
+Inside my projects, lines are no longer than 80 characters (due to prettier) and there are usually around 200 lines in one file, to keep the code readable and maintainable.
+
+Formating is done the same style using prettier. In both L2 and L3, the same line length, same indentation and same spacing is used throughout the project.
+
+![Figure 9](img/9.png) <br>
+_Figure 9_
+
+![Figure 10](img/10.png) <br>
+_Figure 10_

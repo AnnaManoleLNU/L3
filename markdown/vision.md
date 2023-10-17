@@ -32,8 +32,8 @@ UC 1 - username
 UC 2 - difficulty level
 2.1 At the start of the game the user can choose the difficulty level. The difficulty level can be easy, medium or hard.
 2.2 The easy difficulty level has 3 colors.
-2.3 The medium difficulty level has 6 colors.
-2.4 The hard difficulty level has 9 colors.
+2.3 The medium difficulty level has 4 colors.
+2.4 The hard difficulty level has 5 colors.
 
 U3 - play game
 3.1 At the start of the game the user can see a sequence of color tiles for 5 seconds. After 5 seconds the tiles get shuffled.

@@ -1,4 +1,4 @@
-import { Game } from './js/Game.js';
+import { ColorMemoryGame } from './js/ColorMemoryGame.js';
 
-const game = new Game();
-game.playGame();
+const colorMemoryGame = new ColorMemoryGame();
+colorMemoryGame.initiateGame();
