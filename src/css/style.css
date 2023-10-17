@@ -67,9 +67,29 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 #tip {
     margin-top: -50px;
     font-size: 0.9em;
+}
+
+/* Reponsive */
+
+@media only screen and (max-width: 900px) {
+    body {
+        font-size: 0.87em;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    input {
+        font-size: 15px;
+    }
+    #game-board {
+        margin-bottom: 0px;
+    }
 }

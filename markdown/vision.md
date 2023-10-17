@@ -48,6 +48,7 @@ U3 - play game
 NF 1 - usability
 1.1 The game is easy to understand and play.
 1.2 The game is visually appealing.
+1.3 The game is responsive.
 
 ## Author
 Anna Manole
