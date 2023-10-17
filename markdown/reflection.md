@@ -13,10 +13,28 @@ _Figure 2_
 
 ## Chapter 3 - Functions
 
-I shorteded my functions and tried not to repeat myself, but I did not follow the rules of Clean Code strictly all the time. Figure 3 and 4 represent before and after in L3, where I had the methods do one thing and keep one level of indentation. 
+I shorteded my functions and tried not to repeat myself, but I did not follow the rules of Clean Code strictly all the time. Figure 3 and 4 represent before and after in L3, where I had the methods do one thing and keep one level of indentation. In my opinion it is more readable, but it would not be something I write to begin with because I am not used to this way of structuring my thoughts. When I think of a next step, I do not think of a new method, but rather a new line of code. The way that is suggested by CC (Figure 4) implies more lines of code, but less comments because the method names are more explicit. This could be a suitable trade-off assuming the programmer is used to this way of thinking. I also had to make some compromise and parameterize the method isTileColorCorrect (Figure 4) in order not to have several levels of indentation and logic nested in the same method. So I think the book contradicts itself and in the real world, it is not always possible to have perfectly "clean" code.
 
 ![Figure 3 - Before](img/3.png) <br>
 _Figure 3 - Before_
 
 ![Figure 4 - After](img/4.png) <br>
 _Figure 4 - After_
+
+## Chapter 4 - Comments
+
+After the experiment in Figure 3 and 4 I am coming to the realization that writing self explanatory code does not require the use of comments. Usually when I do a revision to my project I tend to skip updating the comments, but rather use the comments to understand my old code, which according to CC shouldn't be necessary if you write clear code. Some of my comments were redundant and could be removed by splitting the code into several methods that have intention reavealing names. Other comments explained the intention behind a behaviour (like in the case of using formulas for calculating luminance or color theory - Figure 5 and Figure 6). <br>
+Figure 7 shows an unnecessary comment that I removed, and instead used a variable name that was more explicit (Figure 8). The variable also stays close to where it is used, so it is easier to understand the context. <br>
+Other things I will consider in the future would be to not add reduntant comments, that restate the obvious (method name in sentence form), although these have been indoctrinated in myself by the courses so far. In my opinion either all methods have a comment or none of them do. To do comments are still useful, and mark what needs to be done in the future, what does not work yet, or what is a temporary solution. It's easy to search through the project for them, in the case of a hiatus from the project. I tend to write longer comments at first, to give myself pointers or even paste the problem inside my project with comments. But after that I try to shorten them and make them more concise, so that they can be a helper to both myself and others who might read my code.
+
+![Figure 5](img/5.png) <br>
+_Figure 5_
+
+![Figure 6](img/6.png) <br>
+_Figure 6_
+
+![Figure 7](img/7.png) <br>
+_Figure 7_
+
+![Figure 8](img/8.png) <br>
+_Figure 8_

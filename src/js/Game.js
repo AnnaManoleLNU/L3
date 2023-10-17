@@ -68,20 +68,20 @@ export class Game {
    * @param {number} numberOfTiles 
    */
   #generateTiles(numberOfTiles) {
-    const colorScheme = []
-    // run the generate colors method for the number of tiles divided by number of colors in the scheme (3/3 or 6/3 or 9/3)
+    const colorsForTiles = []
+    const numberOfColorsInScheme = 3
 
-    for (let i = 0; i < numberOfTiles / 3; i++) {
+    for (let i = 0; i < numberOfTiles / numberOfColorsInScheme; i++) {
       const generatedColors = this.#generateColors();
       for (let i = 0; i < generatedColors.length; i++) {
-        colorScheme.push(generatedColors[i]);
+        colorsForTiles.push(generatedColors[i]);
       }
     }
     for (let i = 0; i < numberOfTiles; i++) {
       this.#tile = document.createElement('button');
       this.#tile.classList.add('tile');
       this.#tile.classList.add('disabled');
-      this.#tile.style.backgroundColor = colorScheme[i];
+      this.#tile.style.backgroundColor = colorsForTiles[i];
       this.#originalTiles.push(this.#tile);
     }
     for (let i = 0; i < this.#originalTiles.length; i++) {
