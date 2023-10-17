@@ -68,3 +68,8 @@ input {
     flex-direction: column;
     align-items: center;
 }
+
+#tip {
+    margin-top: -50px;
+    font-size: 0.9em;
+}

@@ -118,7 +118,8 @@ export class ColorMemoryGame {
       gameTitle.textContent = 'Tiles shuffled!';
       document.getElementById('user-guesses').classList.remove('hidden');
 
-      this.#tileOnClick();
+      this.#gameTileOnClick();
+      this.#userTileOnClick(); 
     }, 4000);
   }
 
@@ -131,7 +132,7 @@ export class ColorMemoryGame {
     return this.#shuffledTiles;
   }
 
-  #tileOnClick() {
+  #gameTileOnClick() {
     document.querySelectorAll('#game-board .tile').forEach(tile => {
       tile.addEventListener('click', () => {
         const userTile = document.createElement('button');
@@ -141,6 +142,21 @@ export class ColorMemoryGame {
         this.#userTiles.push(userTile);
       });
     });
+  }
+
+  #userTileOnClick() {
+    document.getElementById('guesses').addEventListener('click', (event) => {
+      const userTile = event.target;
+      if (userTile.classList.contains('tile')) {
+        this.#removeUserTile(userTile);
+      }
+    });
+  }
+
+  #removeUserTile(userTile) {
+    const index = this.#userTiles.indexOf(userTile);
+    this.#userTiles.splice(index, 1);
+    userTile.remove();
   }
 
   #isGameWon() {
