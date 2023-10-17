@@ -1,18 +1,27 @@
 export class ThemeSwitcher {
-  #currentTheme = 'dark'
+  #currentTheme = 'dark';
+  #isSwitching = false;
+  #switchDelay = 100; // 100ms delay
 
-  constructor() {
-  }
+  constructor() {}
 
   initiateThemeSwitcher() {
     const themeSwitcher = document.querySelector('.theme-switcher');
     themeSwitcher.addEventListener('click', () => {
-      if (this.#currentTheme === 'dark') {
-        this.#setLightTheme();
-      } else {
-        this.#setDarkTheme();
+      if (!this.#isSwitching) {
+        this.#isSwitching = true;
+        this.#switchTheme();
+        setTimeout(() => this.#isSwitching = false, this.#switchDelay);
       }
     });
+  }
+
+  #switchTheme() {
+    if (this.#currentTheme === 'dark') {
+      this.#setLightTheme();
+    } else {
+      this.#setDarkTheme();
+    }
   }
 
   #setLightTheme() {
@@ -24,6 +33,5 @@ export class ThemeSwitcher {
     this.#currentTheme = 'dark';
     console.log(this.#currentTheme);
   }
-
 
 }
