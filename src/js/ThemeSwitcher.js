@@ -4,7 +4,7 @@ export class ThemeSwitcher {
   #switchDelay = 100; // 100ms delay
 
   constructor() {
-    this.initiateThemeSwitcher(); // TODO: make this private and use it in ColorMemoryGame.js
+    this.initiateThemeSwitcher(); // TODO: make this private and use it in ColorMemoryGame.js, maybe?
   }
 
   initiateThemeSwitcher() {
@@ -36,7 +36,10 @@ export class ThemeSwitcher {
     this.#currentTheme = 'dark';
     document.documentElement.style.setProperty('--light', 'whitesmoke');
     document.documentElement.style.setProperty('--dark', '#212529');
-    console.log(this.#currentTheme);
+  }
+
+  getcurrentTheme() {
+    return this.#currentTheme;
   }
 
 }

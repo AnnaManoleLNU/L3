@@ -1,5 +1,6 @@
 import { ColorGenerator } from '../../lib/js/ColorGenerator.js'
 import { ColorSchemeGenerator } from '../../lib/js/ColorSchemeGenerator.js'
+import { ThemeSwitcher } from './ThemeSwitcher.js'
 
 
 export class ColorMemoryGame {
@@ -11,6 +12,7 @@ export class ColorMemoryGame {
   #originalTiles = []
   #shuffledTiles = []
   #userTiles = []
+  #themeSwitcher
 
   constructor() {
     this.#startScreen = document.getElementById('start-screen');
@@ -18,6 +20,9 @@ export class ColorMemoryGame {
     this.#gameScreen = document.getElementById('game-screen');
     this.#gameBoard = document.getElementById('game-board');
     this.#endScreen = document.getElementById('end-screen');
+
+    this.#themeSwitcher = new ThemeSwitcher();
+    this.#themeSwitcher.initiateThemeSwitcher();
   }
 
   initiateGame() {
@@ -88,8 +93,16 @@ export class ColorMemoryGame {
   #generateColors() {
     const colorScheme = [];
     const colorGenerator = new ColorGenerator();
-    const color = colorGenerator.generateLightColor();
-    colorScheme.push(color);
+    let color;
+
+    const theme = this.#themeSwitcher.getcurrentTheme();
+    if (theme === 'dark') {
+      color = colorGenerator.generateLightColor();
+      colorScheme.push(color);
+    } else if (theme === 'light'){
+      color = colorGenerator.generateDarkColor();
+      colorScheme.push(color);
+    }
 
     const colorSchemeGenerator = new ColorSchemeGenerator();
     const generatedColors = colorSchemeGenerator.generateAnalogousColorScheme(color);
