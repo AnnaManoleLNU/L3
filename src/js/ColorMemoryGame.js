@@ -57,42 +57,42 @@ export class ColorMemoryGame {
   }
 
   #generateTiles(numberOfTiles) {
+    const colorsForTiles = this.#generateColorsForTiles(numberOfTiles);
+    this.#createAndAppendTiles(colorsForTiles);
+  }
+
+  #generateColorsForTiles(numberOfTiles) {
     const colorsForTiles = [];
     const numberOfColorsInScheme = 3;
 
     for (let i = 0; i < numberOfTiles / numberOfColorsInScheme; i++) {
-      const generatedColors = this.#generateColors();
-      for (let i = 0; i < generatedColors.length; i++) {
-        colorsForTiles.push(generatedColors[i]);
-      }
+      const generatedColors = this.#generateColorScheme();
+      colorsForTiles.push(...generatedColors);
     }
+    
+    // Get only the number of colors needed for a certain difficulty.
+    return colorsForTiles.slice(0, numberOfTiles);
+  }
 
-    for (let i = 0; i < numberOfTiles; i++) {
-      const tile = document.createElement("button");
-      tile.classList.add("tile");
-      tile.classList.add("disabled");
-      tile.style.backgroundColor = colorsForTiles[i];
+  #createAndAppendTiles(colorsForTiles) {
+    for (let i = 0; i < colorsForTiles.length; i++) {
+      const tile = this.#createTile(colorsForTiles[i]);
       this.#originalTiles.push(tile);
-    }
-
-    for (let i = 0; i < this.#originalTiles.length; i++) {
-      this.#gameBoard.appendChild(this.#originalTiles[i]);
+      this.#gameBoard.appendChild(tile);
     }
   }
 
-  #generateColors() {
-    const colorScheme = [];
-    const colorGenerator = new ColorGenerator();
-    let color;
+  #createTile(colorGenerated) {
+    const tile = document.createElement("button");
+    tile.classList.add("tile", "disabled");
+    tile.style.backgroundColor = colorGenerated;
+    return tile;
+  }
 
-    const theme = this.themeSwitcher.getCurrentTheme();
-    if (theme === "dark") {
-      color = colorGenerator.generateLightColor();
-      colorScheme.push(color);
-    } else if (theme === "light") {
-      color = colorGenerator.generateDarkColor();
-      colorScheme.push(color);
-    }
+  #generateColorScheme() {
+    const colorScheme = [];
+    const color = this.#generateColorDependingOnTheme();
+    colorScheme.push(color);
 
     const colorSchemeGenerator = new ColorSchemeGenerator();
     const generatedColors =
@@ -101,6 +101,16 @@ export class ColorMemoryGame {
       colorScheme.push(generatedColors[i]);
     }
     return colorScheme;
+  }
+
+  #generateColorDependingOnTheme() {
+    const colorGenerator = new ColorGenerator();
+    const theme = this.themeSwitcher.getCurrentTheme();
+    if (theme === "dark") {
+      return colorGenerator.generateLightColor();
+    } else if (theme === "light") {
+      return colorGenerator.generateDarkColor();
+    }
   }
 
   #initiateGuessingGame() {
