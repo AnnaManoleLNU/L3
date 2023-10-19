@@ -55,3 +55,22 @@ _Figure 9_
 
 ![Figure 10](img/10.png) <br>
 _Figure 10_
+
+## Chapter 6 - Objects and Data Structures
+
+Notes: no uncesssary getters and setters.
+
+Objects hide their data behind abstractions and expose functions that operate on that data. Data structures expose their data and have no meaningful functions.
+
+Law of Demeter: talk to friends, not to strangers. Do not call methods on objects that were returned by calling methods on other objects. 
+
+## Chapter 7 - Error Handling
+
+## Chapter 8 - Boundaries
+
+## Chapter 9 - Unit Tests
+
+
+## Chapter 10 - Classes
+
+## Chapter 11 - Systems

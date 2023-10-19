@@ -1,169 +1,174 @@
 :root {
-    --light: whitesmoke;
-    --dark: #212529;
+  --light: whitesmoke;
+  --dark: #212529;
 }
 
 body {
-    background-color: var(--dark);
-    font-family: 'Rubik', sans-serif;
-    font-size: 20px;
-    color: var(--light);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+  background-color: var(--dark);
+  font-family: "Rubik", sans-serif;
+  font-size: 20px;
+  color: var(--light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
 h1 {
-    font-size: 80px;
+  font-size: 80px;
 }
 
 button {
-    background-color: var(--dark);
-    color: var(--light);
-    border: var(--light) solid 1px;
-    border-radius: 5px;
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 5px;
-    cursor: pointer;
-    font-family: 'Rubik', sans-serif;
+  background-color: var(--dark);
+  color: var(--light);
+  border: var(--light) solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-family: "Rubik", sans-serif;
 }
 
 button:hover {
-    background-color: var(--light);
-    color: var(--dark);
-    transition: 0.1s;
+  background-color: var(--light);
+  color: var(--dark);
+  transition: 0.1s;
 }
 
 input {
-    /* set the background to be gray */
-    background-color: var(--light);
-    color: var(--dark);
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 5px;
-    text-align: center;
+  /* set the background to be gray */
+  background-color: var(--light);
+  color: var(--dark);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
 }
 
 .tile {
-    height: 50px;
-    width: 50px;
-    border: none;
+  height: 50px;
+  width: 50px;
+  border: none;
 }
 
-#game-board, #user-guesses, #guesses {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 50px;
+#game-board,
+#user-guesses,
+#guesses {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 50px;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .disabled {
-    pointer-events: none;
+  pointer-events: none;
 }
 
-#start-screen, #game-screen, #end-screen, #difficulty-screen, #user-guesses {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+#start-screen,
+#game-screen,
+#end-screen,
+#difficulty-screen,
+#user-guesses {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 #tip {
-    margin-top: -50px;
-    font-size: 0.9em;
+  margin-top: -50px;
+  font-size: 0.9em;
 }
 
 /* Reponsive */
 
 @media only screen and (max-width: 900px) {
-    body {
-        font-size: 0.87em;
-        margin-top: 100px;
-    }
+  body {
+    font-size: 0.87em;
+    margin-top: 100px;
+  }
 
-    h1 {
-        font-size: 50px;
-    }
+  h1 {
+    font-size: 50px;
+  }
 
-    input {
-        font-size: 15px;
-    }
+  input {
+    font-size: 15px;
+  }
 
-    #game-board {
-        margin-bottom: 0px;
-    }
+  #game-board {
+    margin-bottom: 0px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    body {
-        font-size: 0.79em;
-        margin-top: 200px;
-    }
+  body {
+    font-size: 0.79em;
+    margin-top: 200px;
+  }
 
-    h1 {
-        font-size: 20px;
-    }
-
+  h1 {
+    font-size: 20px;
+  }
 }
 
 /* Switcher */
 /* Taken and modified to suit my project from https://codepen.io/alvarotrigo/pen/zYPydpB */
 
 .theme-switcher {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 60px; 
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 60px;
 }
 
 label {
-    position: absolute;
-    width: 100%;
-    height: 30px; 
-    background-color: var(--light);
-    border-radius: 50px;
-    cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  background-color: var(--light);
+  border-radius: 50px;
+  cursor: pointer;
 }
 
 input[type="checkbox"] {
-    position: absolute;
-    display: none;
+  position: absolute;
+  display: none;
 }
 
 .slider {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50px;
-    transition: 0.3s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  transition: 0.3s;
 }
 
 input:checked ~ .slider {
-    background-color: var(--light);
+  background-color: var(--light);
 }
 
 .slider::before {
-    content: "";
-    position: absolute;
-    top: 3px; 
-    left: 4px; 
-    width: 24px; 
-    height: 24px; 
-    border-radius: 50%;
-    box-shadow: inset 9px -1px 0px 0px var(--dark);
-    background-color: var(--light);
-    transition: 0.3s;
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-shadow: inset 9px -1px 0px 0px var(--dark);
+  background-color: var(--light);
+  transition: 0.3s;
 }
 
 input:checked ~ .slider::before {
-    transform: translateX(26px); 
-    background-color: var(--dark);
-    box-shadow: none;
+  transform: translateX(26px);
+  background-color: var(--dark);
+  box-shadow: none;
 }

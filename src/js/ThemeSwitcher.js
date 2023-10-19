@@ -1,25 +1,24 @@
 export class ThemeSwitcher {
-  #currentTheme = 'dark';
+  #currentTheme = "dark";
   #isSwitching = false;
-  #switchDelay = 100; // 100ms delay
 
   constructor() {
-    this.initiateThemeSwitcher(); // TODO: make this private and use it in ColorMemoryGame.js, maybe?
+    this.initiateThemeSwitcher();
   }
 
   initiateThemeSwitcher() {
-    const themeSwitcher = document.querySelector('.theme-switcher');
-    themeSwitcher.addEventListener('click', () => {
+    const themeSwitcher = document.querySelector(".theme-switcher");
+    themeSwitcher.addEventListener("click", () => {
       if (!this.#isSwitching) {
         this.#isSwitching = true;
         this.#switchTheme();
-        setTimeout(() => this.#isSwitching = false, this.#switchDelay);
+        setTimeout(() => (this.#isSwitching = false), 100);
       }
     });
   }
 
   #switchTheme() {
-    if (this.#currentTheme === 'dark') {
+    if (this.#currentTheme === "dark") {
       this.#setLightTheme();
     } else {
       this.#setDarkTheme();
@@ -27,19 +26,18 @@ export class ThemeSwitcher {
   }
 
   #setLightTheme() {
-    this.#currentTheme = 'light';
-    document.documentElement.style.setProperty('--light', '#212529');  
-    document.documentElement.style.setProperty('--dark', 'whitesmoke'); 
+    this.#currentTheme = "light";
+    document.documentElement.style.setProperty("--light", "#212529");
+    document.documentElement.style.setProperty("--dark", "whitesmoke");
   }
 
   #setDarkTheme() {
-    this.#currentTheme = 'dark';
-    document.documentElement.style.setProperty('--light', 'whitesmoke');
-    document.documentElement.style.setProperty('--dark', '#212529');
+    this.#currentTheme = "dark";
+    document.documentElement.style.setProperty("--light", "whitesmoke");
+    document.documentElement.style.setProperty("--dark", "#212529");
   }
 
   getcurrentTheme() {
     return this.#currentTheme;
   }
-
 }
