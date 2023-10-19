@@ -91,15 +91,19 @@ export class ColorMemoryGame {
 
   #generateColorScheme() {
     const colorScheme = [];
+    const colorSchemeGenerator = new ColorSchemeGenerator();
+
+    // The first color in the scheme to generate 2 analogous colors from.
     const color = this.#generateColorDependingOnTheme();
     colorScheme.push(color);
 
-    const colorSchemeGenerator = new ColorSchemeGenerator();
+    // Generate 2 analogous colors from the first color.
     const generatedColors =
       colorSchemeGenerator.generateAnalogousColorScheme(color);
     for (let i = 0; i < generatedColors.length; i++) {
       colorScheme.push(generatedColors[i]);
     }
+
     return colorScheme;
   }
 
@@ -116,9 +120,7 @@ export class ColorMemoryGame {
   #initiateGuessingGame() {
     setTimeout(() => {
       this.#shuffledTiles = this.#shuffleTiles();
-      while (this.#gameBoard.firstChild) {
-        this.#gameBoard.removeChild(this.#gameBoard.firstChild);
-      }
+      this.#clearGameTiles();
       // Reconstructing and appending shuffled tiles
       this.#shuffledTiles.forEach((tile) => {
         const newTile = document.createElement("button");
@@ -228,7 +230,7 @@ export class ColorMemoryGame {
   #playAgain() {
     const playAgainButton = document.getElementById("play-again");
     playAgainButton.addEventListener("click", () => {
-      this.#clearTiles();
+      this.#clearGameTiles();
       this.#removeUserGuesses();
       this.#resetGuessingGame();
       this.#endScreen.classList.add("hidden");
@@ -236,7 +238,7 @@ export class ColorMemoryGame {
     });
   }
 
-  #clearTiles() {
+  #clearGameTiles() {
     while (this.#gameBoard.firstChild) {
       this.#gameBoard.removeChild(this.#gameBoard.firstChild);
     }
