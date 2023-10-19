@@ -2,30 +2,17 @@ import { ColorGenerator } from "../../lib/js/ColorGenerator.js";
 import { ColorSchemeGenerator } from "../../lib/js/ColorSchemeGenerator.js";
 
 export class ColorMemoryGame {
-  #startScreen;
-  #difficultyScreen;
-  #gameScreen;
-  #gameBoard;
-  #endScreen;
+  #startScreen = document.getElementById("start-screen");
+  #difficultyScreen = document.getElementById("difficulty-screen");
+  #gameScreen = document.getElementById("game-screen");
+  #gameBoard = document.getElementById("game-board");
+  #endScreen = document.getElementById("end-screen");
   #originalTiles = [];
   #shuffledTiles = [];
   #userTiles = [];
-  // #themeSwitcher;
-  // #colorGenerator;
-  // #colorSchemeGenerator;
 
-
-  constructor(themeSwitcher, colorGenerator, colorSchemeGenerator) {
-    this.#startScreen = document.getElementById("start-screen");
-    this.#difficultyScreen = document.getElementById("difficulty-screen");
-    this.#gameScreen = document.getElementById("game-screen");
-    this.#gameBoard = document.getElementById("game-board");
-    this.#endScreen = document.getElementById("end-screen");
-
+  constructor(themeSwitcher) {
     this.themeSwitcher = themeSwitcher;
-    this.colorGenerator = colorGenerator;
-    this.colorSchemeGenerator = colorSchemeGenerator;
-
   }
 
   initiateGame() {
@@ -95,19 +82,21 @@ export class ColorMemoryGame {
 
   #generateColors() {
     const colorScheme = [];
+    const colorGenerator = new ColorGenerator();
     let color;
 
     const theme = this.themeSwitcher.getcurrentTheme();
     if (theme === "dark") {
-      color = this.colorGenerator.generateLightColor();
+      color = colorGenerator.generateLightColor();
       colorScheme.push(color);
     } else if (theme === "light") {
-      color = this.colorGenerator.generateDarkColor();
+      color = colorGenerator.generateDarkColor();
       colorScheme.push(color);
     }
 
+    const colorSchemeGenerator = new ColorSchemeGenerator();
     const generatedColors =
-      this.colorSchemeGenerator.generateAnalogousColorScheme(color);
+      colorSchemeGenerator.generateAnalogousColorScheme(color);
     for (let i = 0; i < generatedColors.length; i++) {
       colorScheme.push(generatedColors[i]);
     }

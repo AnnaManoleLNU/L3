@@ -1,43 +1,47 @@
 export class ThemeSwitcher {
   #currentTheme = "dark";
-  #isSwitching = false;
+  #isThemeSwitching = false;
 
   constructor() {
-    this.initiateThemeSwitcher();
+    this.#initiateThemeSwitcher();
   }
 
-  initiateThemeSwitcher() {
+  #initiateThemeSwitcher() {
     const themeSwitcher = document.querySelector(".theme-switcher");
     themeSwitcher.addEventListener("click", () => {
-      if (!this.#isSwitching) {
-        this.#isSwitching = true;
+      if (!this.#isThemeSwitching) {
+        this.#isThemeSwitching = true;
         this.#switchTheme();
-        setTimeout(() => (this.#isSwitching = false), 100);
+        setTimeout(() => (this.#isThemeSwitching = false), 100);
       }
     });
   }
 
   #switchTheme() {
     if (this.#currentTheme === "dark") {
-      this.#setLightTheme();
+      this.#applyLightTheme();
     } else {
-      this.#setDarkTheme();
+      this.#applyDarkTheme();
     }
   }
 
-  #setLightTheme() {
+  #applyLightTheme() {
     this.#currentTheme = "light";
-    document.documentElement.style.setProperty("--light", "#212529");
-    document.documentElement.style.setProperty("--dark", "whitesmoke");
+    this.#setThemeProperties("#212529", "whitesmoke");
   }
 
-  #setDarkTheme() {
+  #applyDarkTheme() {
     this.#currentTheme = "dark";
-    document.documentElement.style.setProperty("--light", "whitesmoke");
-    document.documentElement.style.setProperty("--dark", "#212529");
+    this.#setThemeProperties("whitesmoke", "#212529");
+  }
+
+  #setThemeProperties(light, dark) {
+    document.documentElement.style.setProperty("--light", light);
+    document.documentElement.style.setProperty("--dark", dark);
   }
 
   getcurrentTheme() {
     return this.#currentTheme;
   }
+
 }
