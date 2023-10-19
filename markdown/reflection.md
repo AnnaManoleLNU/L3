@@ -64,13 +64,50 @@ Objects hide their data behind abstractions and expose functions that operate on
 
 Law of Demeter: talk to friends, not to strangers. Do not call methods on objects that were returned by calling methods on other objects. 
 
+ThemeSwitcher is an object, in the sense that it hides its methods and only provides access to its attribute of "current theme".
+
+Hiding the structure of the objects with private methods and attributes. getter for currenttheme.
+
 ## Chapter 7 - Error Handling
+
+If the error handling code is mixed with the main logic, it is harder to read and understand the main logic. Throw exceptions only when really necessary. 
+
+Don't return null. Don't pass null. 
+
+In JavaScript all exceptions are unchecked. Using a try-catch block intercepts the error and allows the program to continue.
+
 
 ## Chapter 8 - Boundaries
 
+In my project I used thrid-party code that I wrote... It introduced some complexity. The library had been tested before...
+
+I did not overexpose parts of my modules to other modules.
+
+I did not use unstable or incomplete third-party code.
+
+Clean boundaries - in a sense the code depends on something I controll because I wrote the library and know its innerworkings so I didn't use any interface.
+
+
 ## Chapter 9 - Unit Tests
+
+In both L2 and L3 I conducted manual tests. I took the requirements and conducted a test for each in L3. In L2 I tested every method in the public interface. Tests were conducted on one thing at a time and had specific steps to follow. 
+
+FIRST - Fast, Independent, Repeatable, Self-Validating, Timely.
+Tests were not depended on each other and easily repeatable following the steps I provided. In the case of manual testing, the tests were not fast, or self-validating, I had to judge the results myself.
 
 
 ## Chapter 10 - Classes
 
+Class organization - attributes at the top, public methods after that, private methods at the bottom. Encapsulation - hide the implementation details of a class from other classes. Most methods are private.
+
+Should be small.
+Single responsibility principle - one reason to change. This means that the class should have only one job.
+Cohesion - methods should use all instance variables.
+
 ## Chapter 11 - Systems
+
+Separation of construction and use - the main method is not in the same class as the class that is being used. The main method is in the index.js file and the classes are in their own files.
+
+Dependency injection - don't abuse it.
+
+Separation of concerns - different parts of the system should be concerned with different things. Separate classes here.

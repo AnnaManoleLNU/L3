@@ -5,6 +5,10 @@ export class ThemeSwitcher {
   constructor() {
     this.#initiateThemeSwitcher();
   }
+  
+  getCurrentTheme() {
+    return this.#currentTheme;
+  }
 
   #initiateThemeSwitcher() {
     const themeSwitcher = document.querySelector(".theme-switcher");
@@ -38,10 +42,6 @@ export class ThemeSwitcher {
   #setThemeProperties(light, dark) {
     document.documentElement.style.setProperty("--light", light);
     document.documentElement.style.setProperty("--dark", dark);
-  }
-
-  getcurrentTheme() {
-    return this.#currentTheme;
   }
 
 }

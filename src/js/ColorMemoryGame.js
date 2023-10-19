@@ -85,7 +85,7 @@ export class ColorMemoryGame {
     const colorGenerator = new ColorGenerator();
     let color;
 
-    const theme = this.themeSwitcher.getcurrentTheme();
+    const theme = this.themeSwitcher.getCurrentTheme();
     if (theme === "dark") {
       color = colorGenerator.generateLightColor();
       colorScheme.push(color);
