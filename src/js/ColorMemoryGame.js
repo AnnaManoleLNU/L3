@@ -103,7 +103,7 @@ export class ColorMemoryGame {
     for (let i = 0; i < generatedColors.length; i++) {
       colorScheme.push(generatedColors[i]);
     }
-
+    
     return colorScheme;
   }
 
@@ -121,23 +121,15 @@ export class ColorMemoryGame {
     setTimeout(() => {
       this.#shuffledTiles = this.#shuffleTiles();
       this.#clearGameTiles();
-      // Reconstructing and appending shuffled tiles
-      this.#shuffledTiles.forEach((tile) => {
-        const newTile = document.createElement("button");
-        newTile.classList.add("tile");
-        newTile.style.backgroundColor = tile.style.backgroundColor;
-        this.#gameBoard.appendChild(newTile);
-      });
-
-      const gameTitle = document.querySelector("#game-screen h2");
-      gameTitle.textContent = "Tiles shuffled!";
-      document.getElementById("user-guesses").classList.remove("hidden");
-
+      this.#recreateTiles();
+      this.#updateGameTitleWithShuffledMessage();
+      this.#revealUserGuesses();
       this.#gameTileOnClick();
       this.#userTileOnClick();
-    }, 4000);
+    }, 4000); // after 4 seconds do the above.
   }
-
+  
+  // Fisher-Yates shuffle algorithm.
   #shuffleTiles() {
     this.#shuffledTiles = Array.from(this.#originalTiles);
     for (let i = this.#shuffledTiles.length - 1; i > 0; i--) {
@@ -148,6 +140,30 @@ export class ColorMemoryGame {
       ];
     }
     return this.#shuffledTiles;
+  }
+
+  #clearGameTiles() {
+    while (this.#gameBoard.firstChild) {
+      this.#gameBoard.removeChild(this.#gameBoard.firstChild);
+    }
+  }
+  
+  #recreateTiles() {
+    this.#shuffledTiles.forEach((tile) => {
+      const newTile = document.createElement("button");
+      newTile.classList.add("tile");
+      newTile.style.backgroundColor = tile.style.backgroundColor;
+      this.#gameBoard.appendChild(newTile);
+    });
+  }
+
+  #updateGameTitleWithShuffledMessage() {
+    const gameTitle = document.querySelector("#game-screen h2");
+    gameTitle.textContent = "Tiles shuffled!";
+  }
+  
+  #revealUserGuesses () {
+    document.getElementById("user-guesses").classList.remove("hidden");
   }
 
   #gameTileOnClick() {
@@ -231,25 +247,25 @@ export class ColorMemoryGame {
     const playAgainButton = document.getElementById("play-again");
     playAgainButton.addEventListener("click", () => {
       this.#clearGameTiles();
-      this.#removeUserGuesses();
+      this.#resetGameTilesToBeGuessed();
+      this.#clearUserTiles();
+      this.#resetUserGuesses();
       this.#resetGuessingGame();
-      this.#endScreen.classList.add("hidden");
-      this.#startScreen.classList.remove("hidden");
     });
   }
 
-  #clearGameTiles() {
-    while (this.#gameBoard.firstChild) {
-      this.#gameBoard.removeChild(this.#gameBoard.firstChild);
-    }
+  #resetGameTilesToBeGuessed() {
     this.#originalTiles = [];
   }
 
-  #removeUserGuesses() {
+  #clearUserTiles() {
     const userTiles = document.getElementById("guesses");
     while (userTiles.firstChild) {
       userTiles.removeChild(userTiles.firstChild);
     }
+  }
+
+  #resetUserGuesses() {
     this.#userTiles = [];
   }
 
@@ -257,5 +273,7 @@ export class ColorMemoryGame {
     const gameTitle = document.querySelector("#game-screen h2");
     gameTitle.textContent = "Shuffling tiles...";
     document.getElementById("user-guesses").classList.add("hidden");
+    this.#endScreen.classList.add("hidden");
+    this.#startScreen.classList.remove("hidden");
   }
 }
