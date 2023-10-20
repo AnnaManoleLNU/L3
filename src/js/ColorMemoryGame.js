@@ -99,7 +99,7 @@ export class ColorMemoryGame {
 
     // Generate 2 analogous colors from the first color.
     const generatedColors =
-      colorSchemeGenerator.generateAnalogousColorScheme(color);
+      colorSchemeGenerator.generateAnalogousColorScheme('color');
     for (let i = 0; i < generatedColors.length; i++) {
       colorScheme.push(generatedColors[i]);
     }

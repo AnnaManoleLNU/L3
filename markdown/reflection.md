@@ -58,23 +58,28 @@ _Figure 10_
 
 ## Chapter 6 - Objects and Data Structures
 
-Notes: no uncesssary getters and setters.
+In L2 and L3 I use no uncessary getters and setters. The ThemeSwitcher class from L3 has a getter for the current theme, but no setter. ThemeSwitcher is an object, in the sense that it hides its methods and only provides access to its attribute of "current theme". In L3's "ColorMemoryGame" only the method to start the game is public, the rest are private. The class is an object, because it hides its methods and only provides access to the method "initiateGame". The ColorMemoryGame uses a ThemeSwitcher object in its constructor to generate colors/change theme according to the ThemeSwitcher's current theme.
 
-Objects hide their data behind abstractions and expose functions that operate on that data. Data structures expose their data and have no meaningful functions.
+![Figure 11](img/11.png) <br>
+_Figure 11_
 
-Law of Demeter: talk to friends, not to strangers. Do not call methods on objects that were returned by calling methods on other objects. 
+L2's classes are necessarily "exposing" more methods because the project is a module offering functionality related to colors. But they are still objects because they don't expose attributes, only methods.
 
-ThemeSwitcher is an object, in the sense that it hides its methods and only provides access to its attribute of "current theme".
-
-Hiding the structure of the objects with private methods and attributes. getter for currenttheme.
+All of the classes respect the law of Demeter and do not call methods on objects that were returned by calling methods on other objects.
 
 ## Chapter 7 - Error Handling
 
-If the error handling code is mixed with the main logic, it is harder to read and understand the main logic. Throw exceptions only when really necessary. 
+If the error handling code is mixed with the main logic, it is harder to read and understand the main logic. In both of the projets I throw exceptions only when really necessary. Because L3 doesn't really have ways users can input malicious things or do wrong in the sense of using the application, I do not throw errors, as to not clutter my program. I instead test as I develop and see if any problems with the program occur. 
 
-Don't return null. Don't pass null. 
+Following this I do not return null or pass in object that may be null in any circumstance. The methods from my module (L2) return a result if used correctly. For this I am throwing an error if the user tries to pass in a color that is not in right rgb format, in order to generate a color scheme. The error is treated as one thing and has its own method. (Figure 12)
 
-In JavaScript all exceptions are unchecked. Using a try-catch block intercepts the error and allows the program to continue.
+![Figure 12](img/12.png) <br>
+_Figure 12_
+
+The developer will then get the error in the console, look up the stack-trace, and will hopefully be wiser than pushing the code into production. (Figure 13)
+
+![Figure 13](img/13.png) <br>
+_Figure 13_
 
 
 ## Chapter 8 - Boundaries
