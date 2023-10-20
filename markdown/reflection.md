@@ -1,4 +1,3 @@
-Here I will reflect on the book CC chapters 2-11. I will be providing screenshots on how I changed my code from L2/L3 according to the book. 10 screenshots. 10 reflections with 4-6 sentences each.
 # Reflections Clean Code
 
 ## Chapter 2 - Meaningful Names
@@ -116,8 +115,13 @@ The classes in L2 respect the SRP to a greater extent, repectively generating co
 
 ## Chapter 11 - Systems
 
-Separation of construction and use - the main method is not in the same class as the class that is being used. The main method is in the index.js file and the classes are in their own files.
+Separation of construction and use - the main method in ColorMemoryGame is not in the same class as the class that is being used. The main method is in the index.js file and the classes are in their own files.
 
-Dependency injection - don't abuse it.
+Dependency injection is not abused, I only used it in the ColorMemoryGame class to inject the current theme from ThemeSwitcher. (Figure 16)
 
-Separation of concerns - different parts of the system should be concerned with different things. Separate classes here.
+![Figure 16](img/16.png) <br>
+_Figure 16_
+
+The module's classes are not tightly coupled, because they do not depend on each other. The module is a collection of functions that can be used separately from each other. 
+
+Separation of concerns - different parts of the system should be concerned with different things. As stated before the class with most problems would be the ColorMemoryGame class, because it is not very cohesive and should be refactored as the application grows. The other classes are more cohesive and have a clear purpose.
