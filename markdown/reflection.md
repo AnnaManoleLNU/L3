@@ -69,7 +69,8 @@ All of the classes respect the law of Demeter and do not call methods on objects
 
 ## Chapter 7 - Error Handling
 
-If the error handling code is mixed with the main logic, it is harder to read and understand the main logic. In both of the projets I throw exceptions only when really necessary. Because L3 doesn't really have ways users can input malicious things or do wrong in the sense of using the application, I do not throw errors, as to not clutter my program. I instead test as I develop and see if any problems with the program occur. 
+If the error handling code is mixed with the main logic, it is harder to read and understand the main logic. In both of the projets I throw exceptions only when really necessary. Because L3 doesn't really have ways users can input malicious things or do wrong in the sense of using the application, I do not throw errors, as to not clutter my program. I instead test as I develop and see if any problems with the program occur.
+One ocassion where I throw an error is when the user tries to enter an empty username. There I throw an error and the user is prompted to enter a username by creating a warning message. 
 
 Following this I do not return null or pass in object that may be null in any circumstance. The methods from my module (L2) return a result if used correctly. For this I am throwing an error if the user tries to pass in a color that is not in right rgb format, in order to generate a color scheme. The error is treated as one thing and has its own method. (Figure 12)
 
@@ -84,14 +85,14 @@ _Figure 13_
 
 ## Chapter 8 - Boundaries
 
-In my project I used thrid-party code that I wrote... It introduced some complexity. The library had been tested before...
+No external API's were used in L2 or L3, both use only the JS standard library. L2 is a module that was manually tested and L3 is a web application that builds on top of L2. L3 was also manually tested. Furthermore I wrote the code for the module L2 so I understand its innerworkings. I did however think about how users may make mistakes when using it, therefore the error handling in Figure 12.
 
-I did not overexpose parts of my modules to other modules.
+I did not overexpose parts of my modules to other modules. In L2 the modules work separately from each other, even though the the colors generated with ColorGenerator can be used in ColorSchemeGenerator or FontColorHelper, this is not a must (rgb strings can be passed in as arguments as well). In L3 the ThemeSwitcher is used in the ColorMemoryGame, but the ColorMemoryGame does not have access to the ThemeSwitcher's methods, only to its current theme. (Figure 11)
 
-I did not use unstable or incomplete third-party code.
+In a sense the code from both projects has clean boundries because it is not dependent on anything external. However, more cases for missuse could be thought of and handled. For example, in L3 the user could try to change the theme before the game has started, or try to change the theme to a theme that does not exist. (Figure 14)
 
-Clean boundaries - in a sense the code depends on something I controll because I wrote the library and know its innerworkings so I didn't use any interface.
-
+![Figure 14](img/14.png) <br>
+_Figure 14_
 
 ## Chapter 9 - Unit Tests
 

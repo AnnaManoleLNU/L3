@@ -16,22 +16,48 @@ export class ColorMemoryGame {
   }
 
   initiateGame() {
-    this.#startGame();
+    this.#setUsernameIntoLocalStorage();
     this.#selectDifficulty();
     this.#endGame();
     this.#playAgain();
   }
 
-  #startGame() {
+  #setUsernameIntoLocalStorage() {
     const usernameInput = document.getElementById("username-input");
     const usernameForm = document.getElementById("username-form");
     usernameForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      this.#startScreen.classList.add("hidden");
-      this.#difficultyScreen.classList.remove("hidden");
-      localStorage.setItem("username", usernameInput.value);
-      usernameInput.value = "";
-    });
+        try {
+        event.preventDefault();
+        this.#throwErrorIfUsernameEmpty(usernameInput.value);
+        this.#startScreen.classList.add("hidden");
+        this.#difficultyScreen.classList.remove("hidden");
+        localStorage.setItem("username", usernameInput.value);
+        usernameInput.value = "";
+      } catch (error) {
+        this.#removeWarningIfUsernameNotEmpty();
+        this.#createWarningIfUsernameEmpty();
+      }
+      });
+  }
+
+  #throwErrorIfUsernameEmpty(username) {
+    if (username === "") {
+      throw new Error("Username cannot be empty!");
+    }
+  }
+
+  #removeWarningIfUsernameNotEmpty() {
+    if (document.getElementById("warning")) {
+      document.getElementById("warning").remove();
+    }
+  }
+
+  #createWarningIfUsernameEmpty() {
+    const warning = document.createElement("p");
+    warning.textContent = "Username cannot be empty!";
+    warning.style.color = "crimson";
+    warning.id = "warning";
+    this.#startScreen.appendChild(warning);
   }
 
   #selectDifficulty() {
@@ -99,7 +125,7 @@ export class ColorMemoryGame {
 
     // Generate 2 analogous colors from the first color.
     const generatedColors =
-      colorSchemeGenerator.generateAnalogousColorScheme('color');
+      colorSchemeGenerator.generateAnalogousColorScheme(color);
     for (let i = 0; i < generatedColors.length; i++) {
       colorScheme.push(generatedColors[i]);
     }
@@ -251,6 +277,7 @@ export class ColorMemoryGame {
       this.#clearUserTiles();
       this.#resetUserTiles();
       this.#resetGuessingGame();
+      this.#removeWarningIfUsernameNotEmpty();
     });
   }
 
@@ -275,5 +302,6 @@ export class ColorMemoryGame {
     document.getElementById("user-guesses").classList.add("hidden");
     this.#endScreen.classList.add("hidden");
     this.#startScreen.classList.remove("hidden");
+
   }
 }
