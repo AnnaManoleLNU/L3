@@ -70,7 +70,7 @@ export class ColorMemoryGame {
       colorsForTiles.push(...generatedColors);
     }
     
-    // Get only the number of colors needed for a certain difficulty.
+    // Get only the number of colors needed for a certain difficulty, because of the loop being running imprecisely, 4/3 = 1.33 -> 2. 5/3 = 1.66 -> 2, both generating 2 schemes -> 6 colors.
     return colorsForTiles.slice(0, numberOfTiles);
   }
 
@@ -247,14 +247,14 @@ export class ColorMemoryGame {
     const playAgainButton = document.getElementById("play-again");
     playAgainButton.addEventListener("click", () => {
       this.#clearGameTiles();
-      this.#resetGameTilesToBeGuessed();
+      this.#resetGameTiles();
       this.#clearUserTiles();
-      this.#resetUserGuesses();
+      this.#resetUserTiles();
       this.#resetGuessingGame();
     });
   }
 
-  #resetGameTilesToBeGuessed() {
+  #resetGameTiles() {
     this.#originalTiles = [];
   }
 
@@ -265,7 +265,7 @@ export class ColorMemoryGame {
     }
   }
 
-  #resetUserGuesses() {
+  #resetUserTiles() {
     this.#userTiles = [];
   }
 
