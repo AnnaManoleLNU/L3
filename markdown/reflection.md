@@ -101,14 +101,18 @@ In both L2 and L3 I conducted manual tests. I took the requirements and conducte
 FIRST - Fast, Independent, Repeatable, Self-Validating, Timely.
 Tests were not depended on each other and easily repeatable following the steps I provided. In the case of manual testing, the tests were not fast, or self-validating, I had to judge the results myself.
 
-
 ## Chapter 10 - Classes
 
-Class organization - attributes at the top, public methods after that, private methods at the bottom. Encapsulation - hide the implementation details of a class from other classes. Most methods are private.
+The class organization is as following: attributes at the top, public methods after that and private methods at the bottom. If a method uses several private methods, these are grouped together and come after the method that uses them. (Figure 15)
 
-Should be small.
-Single responsibility principle - one reason to change. This means that the class should have only one job.
-Cohesion - methods should use all instance variables.
+![Figure 15](img/15.png) <br>
+_Figure 15_
+
+ The classes in L3 and L3 are encapsulated by hiding their implementation details from other classes - having most methods private and only exposing the public interface. L2 has a larger public interface because it is a module that offers functionality to other applications. L3 is a web application that uses the module L2, so it only exposes the start method ("initiateGame").
+
+Admittedly, the ColorMemoryGame class has about 300 lines of code and is not small. The class is also not very cohesive because the methods do not use all instance variables. It could be split into smaller classes (DOM manipulation, game logic, error handling), but I think it is not necessary because the application is not yet extensive in its functionality and it is easier for me to understand the code when it is all in one place. If the application were to grow, I would  consider splitting the class into smaller classes.
+
+The classes in L2 respect the SRP to a greater extent, repectively generating colors, color schemes and handling font colors. This was easier to achieve when no application logic was involved.
 
 ## Chapter 11 - Systems
 
