@@ -26,7 +26,7 @@ export class ColorMemoryGame {
     const usernameInput = document.getElementById("username-input");
     const usernameForm = document.getElementById("username-form");
     usernameForm.addEventListener("submit", (event) => {
-        try {
+      try {
         event.preventDefault();
         this.#throwErrorIfUsernameEmpty(usernameInput.value);
         this.#startScreen.classList.add("hidden");
@@ -37,7 +37,7 @@ export class ColorMemoryGame {
         this.#removeWarningIfUsernameNotEmpty();
         this.#createWarningIfUsernameEmpty();
       }
-      });
+    });
   }
 
   #throwErrorIfUsernameEmpty(username) {
@@ -95,7 +95,7 @@ export class ColorMemoryGame {
       const generatedColors = this.#generateColorScheme();
       colorsForTiles.push(...generatedColors);
     }
-    
+
     // Get only the number of colors needed for a certain difficulty, because of the loop being running imprecisely, 4/3 = 1.33 -> 2. 5/3 = 1.66 -> 2, both generating 2 schemes -> 6 colors.
     return colorsForTiles.slice(0, numberOfTiles);
   }
@@ -129,7 +129,7 @@ export class ColorMemoryGame {
     for (let i = 0; i < generatedColors.length; i++) {
       colorScheme.push(generatedColors[i]);
     }
-    
+
     return colorScheme;
   }
 
@@ -154,7 +154,7 @@ export class ColorMemoryGame {
       this.#userTileOnClick();
     }, 5000); // after 5 seconds do the above.
   }
-  
+
   // Fisher-Yates shuffle algorithm.
   #shuffleTiles() {
     this.#shuffledTiles = Array.from(this.#originalTiles);
@@ -173,7 +173,7 @@ export class ColorMemoryGame {
       this.#gameBoard.removeChild(this.#gameBoard.firstChild);
     }
   }
-  
+
   #recreateTiles() {
     this.#shuffledTiles.forEach((tile) => {
       const newTile = document.createElement("button");
@@ -187,8 +187,8 @@ export class ColorMemoryGame {
     const gameTitle = document.querySelector("#game-screen h2");
     gameTitle.textContent = "Tiles shuffled!";
   }
-  
-  #revealUserGuesses () {
+
+  #revealUserGuesses() {
     document.getElementById("user-guesses").classList.remove("hidden");
   }
 
@@ -302,6 +302,5 @@ export class ColorMemoryGame {
     document.getElementById("user-guesses").classList.add("hidden");
     this.#endScreen.classList.add("hidden");
     this.#startScreen.classList.remove("hidden");
-
   }
 }

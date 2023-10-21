@@ -1,4 +1,4 @@
-import { ColorMemoryGame } from './js/ColorMemoryGame.js';
+import { ColorMemoryGame } from "./js/ColorMemoryGame.js";
 import { ThemeSwitcher } from "./js/ThemeSwitcher.js";
 
 const themeSwitcher = new ThemeSwitcher();

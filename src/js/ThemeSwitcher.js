@@ -5,7 +5,7 @@ export class ThemeSwitcher {
   constructor() {
     this.#initiateThemeSwitcher();
   }
-  
+
   getCurrentTheme() {
     return this.#currentTheme;
   }
@@ -43,5 +43,4 @@ export class ThemeSwitcher {
     document.documentElement.style.setProperty("--light", light);
     document.documentElement.style.setProperty("--dark", dark);
   }
-
 }
