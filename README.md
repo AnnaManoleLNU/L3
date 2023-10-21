@@ -15,7 +15,7 @@ You may find the application hosted at https://color-memory-app.netlify.app/
 The project vision can be found in the file [vision.md](markdown/vision.md).
 
 ## Test cases
-The test cases can be found in the file [testing.md](markdown/testing.md).
+The test cases can be found in the fil=e [testing.md](markdown/testing.md).
 
 ## Authors 
 - Anna Manole
@@ -24,4 +24,4 @@ The test cases can be found in the file [testing.md](markdown/testing.md).
 JavaScript, HTML, CSS, Node.js, Vite, Netlify
 
 ## Notes
-- The application is not responsive for now. It is best viewed on a desktop or laptop.
+- Further development of the application is not planned for the moment.

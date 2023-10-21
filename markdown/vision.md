@@ -39,9 +39,8 @@ U3 - play game
 3.1 At the start of the game the user can see a sequence of color tiles for 5 seconds. After 5 seconds the tiles get shuffled.
 3.2 The user can click on the shuffled tiles to generate their own sequence of tiles. The tiles get added to the user's sequence in the order in which they were clicked, last tile clicked is last in the sequence.
 3.3 The user can remove any number of tiles from their sequence by clicking on any tile in their sequence.
-3.4 The user can submit their sequence by clicking on the submit button.
-3.5 If the user submits the correct sequence, they win the game.
-3.6 If the user submits the wrong sequence, they lose the game.
+3.4 If the user submits the correct sequence, they win the game.
+3.5 If the user submits the wrong sequence, they lose the game.
 
 ## Non-functional requirements
 

@@ -152,7 +152,7 @@ export class ColorMemoryGame {
       this.#revealUserGuesses();
       this.#gameTileOnClick();
       this.#userTileOnClick();
-    }, 4000); // after 4 seconds do the above.
+    }, 5000); // after 5 seconds do the above.
   }
   
   // Fisher-Yates shuffle algorithm.

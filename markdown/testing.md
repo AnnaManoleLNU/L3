@@ -1,1 +1,71 @@
-Here I will talk about how I tested the requirements from vision.md. Manual testing with input and expected output. Or it can be automatic testing too. At least a test per requirement.
+# Manual testing
+
+## Results table - functional requirements
+
+| Test case | Input | Expected result | Actual result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| 1.1 | Username: `John` | Go to difficulty screen | Go to difficulty screen | Pass |
+| 1.2 | Username: `John` | End screen shows `John` | End screen shows `John` | Pass |
+| 1.3 | Username: ` ` | Error message: `Username cannot be empty!` | Error message: `Please enter a username` | Pass |
+| 2.1 | Click on all difficulty levels, separately | Able to select any difficulty level | Able to select any difficulty level | Pass |
+| 2.2 | Click on Difficulty: `Easy` | 3 colors | 3 colors | Pass (with notation that some colors may be generated to be the same, given enough tries) |
+| 2.3 | Click on Difficulty: `Medium` | 4 colors | 4 colors | Pass (with notation that some colors may be generated to be the same, given enough tries) |
+| 2.4 | Click Difficulty: `Hard` | 5 colors | 5 colors | Pass (with notation that some colors may be generated to be the same, given enough tries) |
+| 3.1 | Click on any difficulty level | Tiles shown for 5 seconds then shuffled | Tiles shown for 5 seconds then shuffled | Pass (with notation that tiles may be shuffled in place with enough tries and fewer colors) |
+| 3.2 | Click on any tile | Tile added to user's sequence last | Tile added to user's sequence last | Pass |
+| 3.3 | Click on any tile in user's sequence | Tile removed from user's sequence | Tile removed from user's sequence | Pass |
+| 3.4 | Submit correct color sequence | Win screen with username and message | Win screen with username and message | Pass |
+| 3.5 | Submit incorrect color sequence | Lose screen with username and message | Lose screen with username and message | Pass |
+| 3.6 | Submit no tiles | Lose screen with username and message | Lose screen with username and message | Pass |
+| 3.7 | Submit correct sequence with extra tiles | Lose screen with username and message | Lose screen with username and message | Pass |
+
+## Description of test cases - functional requirements
+
+### TC 1 - username
+
+1.1 At the start of the game the user can enter their username.
+
+1.2 At the end of the game the user can see their score and the username they entered at the start of the game.
+
+1.3 The user leaves the username field empty and clicks on the submit button.
+
+
+### TC 2 - difficulty level
+
+2.1 Choose the difficulty level: easy, medium or hard.
+
+2.2 The easy difficulty level has 3 colors.
+
+2.3 The medium difficulty level has 4 colors.
+
+2.4 The hard difficulty level has 5 colors.
+
+
+### TC 3 - play game
+
+3.1 At the start of the game the user can see a sequence of color tiles for 5 seconds. After 5 seconds the tiles get shuffled.
+
+3.2 The user can click on the shuffled tiles to generate their own sequence of tiles. The tiles get added to the user's sequence in the order in which they were clicked, last tile clicked is last in the sequence.
+
+3.3 The user can remove any number of tiles from their sequence by clicking on any tile in their sequence.
+
+3.4 If the user submits the correct sequence, they win the game.
+
+3.5 If the user submits the wrong sequence, they lose the game.
+
+3.6 If the user submits no tiles, they lose the game.
+
+3.7 If the user submits the correct sequence, but adds more tiles to it, they lose the game.
+
+## Description of test cases - non-functional requirements
+
+### NF 1 - usability
+
+1.1 The game is easy to understand and play.
+The game was shown to 2 users who were not familiar with the game. They were able to understand the game and play it without any help. However, both users expressed concern about the original game difficulties medium (6 colors) and hard (9 colors). They found it difficult to remember the sequence of colors, given the time limit of 5 seconds, especially since the colors can get slumped to be the very similar. Thus the decision was made to change the medium difficulty to 4 colors and the hard difficulty to 5 colors.
+
+1.2 The game is visually appealing.
+The 2 users that tested the game were asked to give their opinions of the game's overall visuals. They found it visually appealing. No rating or scale was used to measure the visual appeal of the game. 
+
+1.3 The game is responsive.
+The game was tested on a desktop computer, a tablet (Samsung Galaxy Tab S7+) and a mobile phone (Samsung Galaxy S23). The game was responsive on all devices. 
