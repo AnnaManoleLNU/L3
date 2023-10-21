@@ -95,10 +95,10 @@ _Figure 14_
 
 ## Chapter 9 - Unit Tests
 
-In both L2 and L3 I conducted manual tests. I took the requirements and conducted a test for each in L3. In L2 I tested every method in the public interface. Tests were conducted on one thing at a time and had specific steps to follow. 
+In both L2 and L3 I conducted manual tests. I took the requirements and conducted a test for each in L3. In L2 I tested every method in the public interface. Tests were conducted on one thing at a time and had specific steps to follow. In L3 I conducted the tests using the application itself and for L3 I wrote a very simple application that sets colors to HTML elements. I did not use any testing frameworks, but I did use the 5 principles of testing: Fast, Independent, Repeatable, Self-Validating, Timely.
 
 FIRST - Fast, Independent, Repeatable, Self-Validating, Timely.
-Tests were not depended on each other and easily repeatable following the steps I provided. In the case of manual testing, the tests were not fast, or self-validating, I had to judge the results myself.
+Tests were not depended on each other and easily repeatable following the steps I provided. In the case of manual testing, the tests were not fast, or self-validating, I had to judge the results myself and compare them to the expected results. The tests were repeatabled because I provided step my step instructions on how I conducted them. The tests were timely, because I conducted them as I was developing the application.
 
 ## Chapter 10 - Classes
 
